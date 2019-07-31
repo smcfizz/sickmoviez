@@ -1,0 +1,294 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Hyper - Responsive Bootstrap 4 Admin Dashboard
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  // App favicon
+  link(rel='shortcut icon' href='../../../assets/images/favicon.ico')
+  // App css
+  link(href='../../../assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/app.min.css' rel='stylesheet' type='text/css')
+  meta(charset='utf-8')
+  title Hyper | Responsive Bootstrap 4 Admin Dasboard - Documentation
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  // App favicon
+  link(rel='shortcut icon' href='../../../assets/images/favicon.ico')
+  // third party css
+  link(href='../../../assets/css/vendor/dataTables.bootstrap4.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/vendor/responsive.bootstrap4.css' rel='stylesheet' type='text/css')
+  // third party css end
+  // App css
+  link(href='../../../assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/app.min.css' rel='stylesheet' type='text/css')
+  meta(charset='utf-8')
+  title Hyper | Responsive Bootstrap 4 Admin Dasboard - Documentation
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  // App favicon
+  link(rel='shortcut icon' href='assets/images/favicon.ico')
+  // third party css
+  link(href='assets/css/vendor/dataTables.bootstrap4.css' rel='stylesheet' type='text/css')
+  link(href='assets/css/vendor/responsive.bootstrap4.css' rel='stylesheet' type='text/css')
+  // third party css end
+  // App css
+  link(href='assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='assets/css/app.min.css' rel='stylesheet' type='text/css')
+// Begin page
+.wrapper
+  | @@include(&apos;./partials/left-sidebar.html&apos;)
+  // ==============================================================
+  // Start Page Content here
+  // ==============================================================
+  .content-page
+    .content
+      .navbar-custom
+        a.logo.text-center.d-none.d-md-inline-block.mr-2(href='/')
+          span.logo-lg
+            img(src='../../../assets/images/logo.png' alt='' height='30')
+            a(href= '/user/' + username) Welcome #{username}
+        button.btn.btn-sm.btn-danger.d-inline-block.d-lg-none.button-menu-mobile(type='button') Menu
+        span.badge.badge-dark.float-right 
+          form(action="/search", method="get").form-inline
+            input.form-control.mr-sm-2(type='text' placeholder='Search Sickmoviez' aria-label='Search', id="title", name="title", autocomplete="off", autofocus)
+            input(hidden, id="ac", name="ac", value="true")
+            input(hidden, id="start", name="start", value="0")
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+      | @@include(&apos;./partials/topbar.html&apos;)
+      // Start Content
+      .container-fluid
+        // start page title
+        .row
+          .col-12
+            .page-title-box
+              .page-title-right
+                ol.breadcrumb.m-0
+                  li.breadcrumb-item
+                    a(href='javascript: void(0);') Main Page
+                  li.breadcrumb-item.active Movie Details
+              h4.page-title Movie Details
+        // end page title
+        .row
+          .col-12
+            .card
+              .card-body
+                .row
+                  .col-lg-5
+                    // Product image
+                    a.text-center.d-block.mb-4(href='https://www.imdb.com/title/' + movie.imdb_id)
+                      img(src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + movie.poster_path style='width:60%')
+                  // end col
+                  .col-lg-7
+                    form.pl-lg-4
+                      // Product title
+                      h3.mt-0
+                        | #{movie.title}
+                      p.mb-1 Release Date: #{movie.release_date} 
+                      p.font-16
+                        span.text-warning.mdi.mdi-star
+                        span.text-warning.mdi.mdi-star
+                        span.text-warning.mdi.mdi-star
+                        span.text-warning.mdi.mdi-star
+                        span.text-warning.mdi.mdi-star
+                      // Product description
+                      .mt-4
+                        h6.font-14 Revenue:
+                        h3  $ #{movie.revenue}
+                        a(href= 'https://www.imdb.com/title/' + movie.imdb_id) IMDB
+                      // Quantity
+                      .mt-4
+                        h6.font-14 Love #{movie.title} ?
+                        .d-flex
+
+                          //input.form-control(type='number' min='1' value='1' placeholder='Qty' style='width: 90px;')
+                          button.btn.btn-danger.ml-2(hidden, type='submit', value = "Add to favorites")
+                            //i.mdi.mdi-star.mr-1
+                            //|  Add to favorites                          
+                            form(action="/add-fav", method="post")
+                            //a(href= '/user/' + username) See Favorites
+                        form(action="/add-fav", method="post")
+                          button.btn.btn-danger.ml-2(type='submit', value = "Add to favorites")
+                            i.mdi.mdi-star.mr-1
+                            |  Add to favorites 
+                          input(hidden, id="title", name="title", value= movie.title)
+                          input(hidden, id="id", name="id", value= movie.id)
+                          //input(type="submit", value="Add to favorites")
+                        a(href= '/user/' + username) See Favorites
+
+                      // Product description
+                      .mt-4
+                        h6.font-14 Overview:
+                        p
+                          | #{movie.overview}
+                      .mt-4
+                        .row
+                          .col-md-4
+                            h6.font-14 Popularity:
+                            p.text-sm.lh-150 #{movie.popularity}
+                          .col-md-4
+                            h6.font-14 Status:
+                            p.text-sm.lh-150 #{movie.status}
+                          .col-md-4
+                            h6.font-14 Tagline:
+                            p.text-sm.lh-150 #{movie.tagline}
+                  // end col
+                // end row
+
+              h2 Cast:
+              table#basic-datatable.table.dt-responsive.nowrap
+                thead.thead-light
+                  tr
+                    th Photo
+                    th Name
+                    th Role
+                    th .
+                tbody
+                  ol 
+                   each val in movie.cast 
+                    tr
+                      td 
+                        a(href = '/detail/cast/' + val.id)
+                        img(src='https://image.tmdb.org/t/p/w138_and_h175_face/' + val.profile_path style='width:15%' )
+                      td 
+                        a(href='/detail/cast/' + val.id) #{val.name}
+                      td #{val.character} 
+                      td 
+                        a(href='/detail/cast/' + val.id) More Info                     
+                
+              // end card-body
+            // end card
+          // end col
+        // end row
+      // container
+    // content
+
+
+
+
+
+
+
+
+  // ==============================================================
+  // End Page content
+  // ==============================================================
+// END wrapper
+// App js
+script(src='../../../assets/js/app.min.js')
+
+
+script(src='../../../assets/js/app.min.js')
+// third party js
+script(src='../../../assets/js/vendor/jquery.dataTables.js')
+script(src='../../../assets/js/vendor/dataTables.bootstrap4.js')
+script(src='../../../assets/js/vendor/dataTables.responsive.min.js')
+script(src='../../../assets/js/vendor/responsive.bootstrap4.min.js')
+// third party js ends
+script(type='text/Javascript').
+  $('#basic-datatable').DataTable({
+  keys: true,
+  "language": {
+  "paginate": {
+  "previous": "<i class='mdi mdi-chevron-left'>",
+  "next": "<i class='mdi mdi-chevron-right'>"
+  }
+  },
+  "drawCallback": function () {
+  $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+  }
+  });
+
+
+// Begin page
+#wrapper
+  // ==============================================================
+  // Start Page Content here
+  // ==============================================================
+  .content-page
+    .content
+      // Start Content
+      .container-fluid
+        .row
+          .col-12
+            .card
+              .card-body
+                .row
+                  .col-lg-5
+              h2 Crew:
+              table#basic-datatable2.table.dt-responsive.nowrap
+                thead.thead-light
+                  tr
+                    th Photo
+                    th Name
+                    th Department
+                    th Job Role
+                    th .
+                tbody
+                  ol 
+                   each val in movie.crew 
+                    tr
+                      td 
+                        img(src='https://image.tmdb.org/t/p/w138_and_h175_face/' + val.profile_path style='width:15%' )
+                      td 
+                        a(href='/detail/crew/' + val.id) #{val.name}
+                      td #{val.department} 
+                      td #{val.job}
+                      td 
+                        a(href='/detail/crew/' + val.id) More Info                     
+                
+                          // end card body
+                        // end card
+                      // end col
+                    // end row
+                  .highlight
+                    pre.  
+
+
+                                                                                            
+                      
+                                                                                            
+                                                                                        
+        // end page-wrapper
+    // content
+    // Footer Start
+    footer.footer
+      .container-fluid
+        .row
+          .col-md-6
+            | 2018 &copy; TAMU Computer Science
+          .col-md-6
+            .text-md-right.footer-links.d-none.d-sm-block
+              a(href='https://engineering.tamu.edu/cse/index.html') About
+    // end Footer
+  // ==============================================================
+  // End Page content
+  // ==============================================================
+// END wrapper
+// bundle
+script(src='assets/js/app.min.js')
+// third party js
+script(src='assets/js/vendor/jquery.dataTables.js')
+script(src='assets/js/vendor/dataTables.bootstrap4.js')
+script(src='assets/js/vendor/dataTables.responsive.min.js')
+script(src='assets/js/vendor/responsive.bootstrap4.min.js')
+// third party js ends
+script(type='text/Javascript').
+  $('#basic-datatable2').DataTable({
+  keys: true,
+  "language": {
+  "paginate": {
+  "previous": "<i class='mdi mdi-chevron-left'>",
+  "next": "<i class='mdi mdi-chevron-right'>"
+  }
+  },
+  "drawCallback": function () {
+  $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+  }
+  });
+

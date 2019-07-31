@@ -1,0 +1,245 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Hyper | Responsive Bootstrap 4 Admin Dasboard - Documentation
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  // App favicon
+  link(rel='shortcut icon' href='../../../assets/images/favicon.ico')
+  // App css
+  link(href='../../../assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/app.min.css' rel='stylesheet' type='text/css')
+// Begin page
+#wrapper
+  // ==============================================================
+  // Start Page Content here
+  // ==============================================================
+  .content-page
+    .content
+      // Topbar Start
+      .navbar-custom
+        a.logo.text-center.d-none.d-md-inline-block.mr-2(href='index.html')
+          span.logo-lg
+            img(src='../../../assets/images/sickmoviez2.png' alt = '' height = '40' href = '/') 
+        button.btn.btn-sm.btn-dark.d-inline-block.d-lg-none.button-menu-mobile(type='button') Menu
+        span.badge.badge-danger.float-right v1.3.0
+      // end Topbar
+      // Start Content
+      .container-fluid
+        .page-wrapper
+          .page-content
+            .card.m-b-30
+              .card-body
+                .p-lg-3
+                  h4.mt-0.mb-2.font-weight-bold Movie:
+                  p
+                    img(src='https://image.tmdb.org/t/p/w600_and_h900_bestv2/' + movie.poster_path style='width:30%')
+                    script.
+                      var slideIndex = 1;
+                      function getImage() {
+                      }
+                  p
+                    #{movie.tagline}
+                                                                    
+                                                                                        
+                .p-lg-3
+                  h4.mt-0.mb-2.font-weight-bold Cast
+                  .table-responsive
+                    table.table.mb-0
+                      thead
+                        tr
+                          th Photo
+                          th Name
+                          th Role
+                      tbody
+                        ol 
+                          each val in movie.cast 
+                            
+                              tr
+                                td
+                                  if val.profile_path != ""
+                                  img(src='https://image.tmdb.org/t/p/w138_and_h175_face/' + val.profile_path style='width:80%')
+                                td
+                                  a(href='/detail/cast/' + val.id) #{val.name}
+                                td
+                                  li #{val.character}
+                       
+        // end page-wrapper
+        .row
+          .col-md-2
+          .col-md-10
+    // content
+    // Footer Start
+    footer.footer
+      .container-fluid
+        .row
+          .col-md-6
+            | 2018 &copy; Hyper - Coderthemes.com
+          .col-md-6
+            .text-md-right.footer-links.d-none.d-sm-block
+              a(href='http://coderthemes.com/' target='_blank') About
+              a(href='http://coderthemes.com/#contact' target='_blank') Support
+    // end Footer
+  // ==============================================================
+  // End Page content
+  // ==============================================================
+// END wrapper
+// bundle
+script(src='../../../assets/js/app.min.js')
+
+  h1 Details forrrr: #{movie.title}
+  form(action="/add-fav", method="post")
+    input(hidden, id="title", name="title", value= movie.title)
+    input(hidden, id="id", name="id", value= movie.id)
+    input(type="submit", value="Add to favorites")
+  //- a(href="/add-fav/" + movie.title + '/' + movie.id) Add to favorites
+  h2 Tagline:
+  h3
+    i  
+      div "#{movie.tagline}"
+  h2 ID: #{movie.id}
+  h2 Poster:
+  img(src='https://image.tmdb.org/t/p/w138_and_h175_face/' + movie.poster_path style='width:10%')
+  script.
+    var slideIndex = 1;
+    function getImage() {
+    }
+
+
+  h2 General Information:
+  h3 Overview
+  div= movie.overview
+  h3 Production Countries:
+  ul
+    each val in movie.production_countries
+      li #{val.name}
+  h3 Budget
+  div= movie.budget
+  h3 Revenue
+  div= movie.revenue
+  h3 Genres
+  ul
+    each val in movie.genres
+      li= val.name
+  h3 Collection:
+  div= movie.belongs_to_collection_name
+  h3 Homepage
+  a(href=movie.homepage) #{movie.title} Homepage
+  h3 Original Language
+  div= movie.original_language
+  h3 Languages offered:
+  ul
+    each val in movie.spoken_languages
+      li #{val.name}
+  h3 IMDB Id:
+  div= movie.imdb_id
+  h3 Production Companies:
+  ul
+    each val in movie.production_companies
+      li #{val.name}                  
+  h3 Release Date
+  div= movie.release_date
+  h3 Runtime:
+  div #{movie.runtime} minutes    
+
+ 
+
+  h2 Crew:
+  ol 
+    // use this to iterate through data
+    each val in movie.crew 
+      li 
+        a(href='/detail/crew/' + val.id) #{val.name}: #{val.id}
+      ul
+        li Job: #{val.department} (#{val.job})
+        if val.profile_path != ""
+          li Profile: #{val.profile_path}
+
+  // displays all data sent to page. Uncomment for dev purposes
+    pre= movie
+
+.page-content
+  .card
+    .card-body
+      .p-lg-1
+        h3.mt-0.mb-2.font-weight-bold Tables
+        p
+          | Tables are being used widespread and are kind of mandatory for most of web applications.
+        .pt-1.pb-3
+          h5.mb-1 How to customize the style of tables?
+          p
+            | Open file 
+            code src/scss/custom/components/_tables.scss
+            |  and change the different style to change the background, text or other colors.
+      .p-lg-1
+        .example-container
+          .row
+            .col-xl-12
+              .card.mb-0
+                .card-body
+                  h4.header-title Basic example
+                  p.text-muted.font-14.mb-4
+                    | For basic styling&mdash;light padding and only horizontal dividers&mdash;add the base class
+                    code .table
+                    |  to any
+                    code &lt;table&gt;
+                    | .
+                  .table-responsive-sm
+                    table.table.table-centered.mb-0
+                      thead
+                        tr
+                          th Name
+                          th Phone Number
+                          th Date of Birth
+                          th Active?
+                      tbody
+                        tr
+                          td Risa D. Pearson
+                          td 336-508-2157
+                          td July 24, 1950
+                          td
+                            // Switch
+                            div
+                              input#switch1(type='checkbox' checked='' data-switch='success')
+                              label.mb-0.d-block(for='switch1' data-on-label='Yes' data-off-label='No')
+                        tr
+                          td Ann C. Thompson
+                          td 646-473-2057
+                          td January 25, 1959
+                          td
+                            // Switch
+                            div
+                              input#switch2(type='checkbox' checked='' data-switch='success')
+                              label.mb-0.d-block(for='switch2' data-on-label='Yes' data-off-label='No')
+                        tr
+                          td Paul J. Friend
+                          td 281-308-0793
+                          td September 1, 1939
+                          td
+                            // Switch
+                            div
+                              input#switch3(type='checkbox' data-switch='success')
+                              label.mb-0.d-block(for='switch3' data-on-label='Yes' data-off-label='No')
+                        tr
+                          td Linda G. Smith
+                          td 606-253-1207
+                          td May 3, 1962
+                          td
+                            // Switch
+                            div
+                              input#switch4(type='checkbox' data-switch='success')
+                              label.mb-0.d-block(for='switch4' data-on-label='Yes' data-off-label='No')
+                // end card body
+              // end card
+        .highlight
+          pre.mb-0.
+            \n                                                            
+                                                                    
+      p
+        | For more options, please refer to official documentation 
+        a(href='https://getbootstrap.com/docs/4.1/content/tables/' target='_blank') here
+
+
+  

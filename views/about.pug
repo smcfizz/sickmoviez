@@ -1,0 +1,148 @@
+head
+  //source used: w3 schools
+  title Movies Database Search
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  link(href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+  link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+  script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  
+
+
+doctype html
+head
+  meta(charset='utf-8')
+  title Hyper - Responsive Bootstrap 4 Admin Dashboard
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  // App favicon
+  link(rel='shortcut icon' href='../../../assets/images/favicon.ico')
+  // App css
+  link(href='../../../assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/app.min.css' rel='stylesheet' type='text/css')
+  meta(charset='utf-8')
+  title Hyper | Responsive Bootstrap 4 Admin Dasboard - Documentation
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  // App favicon
+  link(rel='shortcut icon' href='../../../assets/images/favicon.ico')
+  // third party css
+  link(href='../../../assets/css/vendor/dataTables.bootstrap4.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/vendor/responsive.bootstrap4.css' rel='stylesheet' type='text/css')
+  // third party css end
+  // App css
+  link(href='../../../assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/app.min.css' rel='stylesheet' type='text/css')
+  meta(charset='utf-8')
+  title Hyper | Responsive Bootstrap 4 Admin Dasboard - Documentation
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  // App favicon
+  link(rel='shortcut icon' href='assets/images/favicon.ico')
+  // third party css
+  link(href='assets/css/vendor/dataTables.bootstrap4.css' rel='stylesheet' type='text/css')
+  link(href='assets/css/vendor/responsive.bootstrap4.css' rel='stylesheet' type='text/css')
+  // third party css end
+  // App css
+  link(href='assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='assets/css/app.min.css' rel='stylesheet' type='text/css')
+// Begin page
+.wrapper
+  | @@include(&apos;./partials/left-sidebar.html&apos;)
+  // ==============================================================
+  // Start Page Content here
+  // ==============================================================
+  .content-page
+      .navbar-custom
+        a.logo.text-center.d-none.d-md-inline-block.mr-2(href='/')
+          span.logo-lg
+            img(src='../../../assets/images/logo.png' alt='' height='30')
+          if isSignedIn
+            a(href= '/user/' + username) Welcome, #{username}
+          else
+            a(href= '/login/') Sign in
+        button.btn.btn-sm.btn-danger.d-inline-block.d-lg-none.button-menu-mobile(type='button') Menu
+        span.badge.badge-dark.float-right 
+          form(action="/search", method="get").form-inline
+            input.form-control.mr-sm-2(type='text' placeholder='Search Sickmoviez' aria-label='Search', id="title", name="title", autocomplete="off", autofocus)
+            input(hidden, id="ac", name="ac", value="true")
+            input(hidden, id="start", name="start", value="0")
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+
+
+      // Start Content
+      .container-fluid
+        // start page title
+        .row
+          .col-12
+            .page-title-box
+              .page-title-right
+                ol.breadcrumb.m-0
+                  li.breadcrumb-item
+                    a(href='/') Main Page
+                  li.breadcrumb-item.active Movie Details
+              h1= title
+        // end page title
+        .row
+          .col-12
+            .card
+              .card-body
+                .row
+                  .col-lg-5
+                    img(src='https://image.tmdb.org/t/p/w138_and_h175_face/' style='width:15%' )
+                  // end col
+                  .col-lg-7
+                    
+
+                img.img-responsive.img.margin.text-center(src='../../../assets/images/logo.png' style='display:inline' alt='Bird' width='1000' height='200')
+              .container-fluid.bg-1.text-center
+                h2.margin How Our Website Works:
+                img.img-responsive.img.margin(src='/images/howitWorks.PNG' style='display:inline' alt='Bird' width='1000' height='1000')
+                h3 We are newly MongoDB experts!!
+              // Second Container
+              .container-fluid.bg-2.text-center
+                h3.margin Want to learn more?
+                p
+                  | MongoDB is a NoSQL document-oriented database program.
+                  | We used MongoDB to store our Movie Data and hosted our MongoDB on our Azure server.  
+                  | To communicate with MongoDB, we used Mongoose, and to display our results, we used pug and Node.js to make this webpage nice!  
+                a.btn.btn-default.btn-lg(href='https://en.wikipedia.org/wiki/MongoDB')
+                  span.glyphicon.glyphicon-search
+                  |  Read More!
+              // Third Container (Grid)
+              .container-fluid.bg-3.text-center
+                h3.margin Meet the team!
+                br
+                .row
+                  .col-sm-3
+                    p
+                      | Mackenzie: Front-End Developer
+                    img.img-responsive.margin(src='/images/mackenzie.jpg' style='width:100%' alt='Image')
+                  .col-sm-3
+                    p
+                      | Ben: Backend Search & Route Expert
+                    img.img-responsive.margin(src='/images/ben.jpg' style='width:100%' alt='Image')
+                  .col-sm-3
+                    p
+                      | Andrew: Data & Server Manager
+                    img.img-responsive.margin(src='/images/andrew.jpg' style='width:100%' alt='Image')
+                  .col-sm-3
+                    p
+                      | David: Backend Search & Route Expert
+                   
+                    img.img-responsive.margin(src='/images/david.jpg' style='width:100%' alt='Image')
+              // Footer
+              footer.container-fluid.bg-4.text-center
+                p
+                  | Assignment Created By 
+                  a(href='https://ecologylab.net/courses/studio/assignments/team1.html') CSCE 315 Dr. Kerne

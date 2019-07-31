@@ -1,0 +1,172 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  link(href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+  meta(charset='utf-8')
+  title Hyper | Responsive Bootstrap 4 Admin Dasboard - Documentation
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  // App favicon
+  link(rel='shortcut icon' href='assets/images/favicon.ico')
+  // App css
+  link(href='assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='assets/css/app.min.css' rel='stylesheet' type='text/css')
+// Begin page
+#wrapper
+  // ==============================================================
+  // Start Page Content here
+  // ==============================================================
+  .content-page
+    .content
+      // Topbar Start
+      .navbar-custom
+        a.logo.text-center.d-none.d-md-inline-block.mr-2(href='/')
+          span.logo-lg
+            img(src='assets/images/logo.png' alt='' height='30')
+          if isSignedIn
+            a(href= '/user/' + username) Welcome, #{username}
+          else
+            a(href= '/login/') Sign in
+        button.btn.btn-sm.btn-danger.d-inline-block.d-lg-none.button-menu-mobile(type='button') Menu
+        span.badge.badge-dark.float-right 
+          form(action="/search", method="get").form-inline
+            input.form-control.mr-sm-2(type='text' placeholder='Search Sickmoviez' aria-label='Search', id="title", name="title", autocomplete="off", autofocus)
+            input(hidden, id="ac", name="ac", value="true")
+            input(hidden, id="start", name="start", value="0")
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+      // end Topbar
+      // Start Content
+      .container-fluid
+        .page-wrapper
+          .left-sidebar
+            .slimscroll-menu
+              .list-group.list-group-transparent.mb-0
+                span.list-group-item.disabled
+                  | Getting Started
+                a.list-group-item.list-group-item-action(href='/about')
+                  span.mr-2
+                    i.mdi.mdi-flag-variant-outline
+                  | Introduction
+                a.list-group-item.list-group-item-action(href='/signup')
+                  span.mr-2
+                    i.mdi.mdi-square-edit-outline
+                  | FREE Sign-Up!
+                span.list-group-item.disabled
+                  | Members
+                a.list-group-item.list-group-item-action(href='login')
+                  span.mr-2
+                    i.mdi.mdi-menu
+                  | Login
+                a.list-group-item.list-group-item-action(href= '/user/' + username)
+                  span.mr-2
+                    i.mdi.mdi-page-layout-sidebar-left
+                  | My Profile
+                
+          // end left-sidebar
+          .page-content
+            .card
+              .card-body
+                .p-lg-1
+                link(rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css')
+                style.
+                  .mySlides {display:none;}
+                .w3-container
+                  h2(style = 'text-align: center') Today's Highest-Grossing Movies
+
+                .w3-content.w3-display-container
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt0499549/')
+                      img(src='/images/avatar.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      |  
+                      a(href='https://www.imdb.com/title/tt0499549/') 1. Avatar
+                
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt2488496/?ref_=nv_sr_1')
+                      img(src='/images/starwars.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 
+                      a(href='https://www.imdb.com/title/tt2488496/?ref_=nv_sr_1') 2. Star Wars: The Force Awakens
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt0120338/?ref_=nv_sr_1')
+                      img(src='/images/titanic.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 3. Titanic
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt0848228/?ref_=nv_sr_4')
+                      img(src='/images/avengers.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 4. The Avengers
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt0369610/?ref_=nv_sr_2')
+                      img(src='/images/jurrassic.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 5. Jurrassic World
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt2820852/?ref_=fn_al_tt_1')
+                      img(src='/images/furious7.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 6. Furious 7
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt2395427/?ref_=nv_sr_1')
+                      img(src='/images/avengersaou.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 7. Avengers: Age Of Ultron
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt1201607/?ref_=nv_sr_3')
+                      img(src='/images/harrypotter.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 8. Harry Potter and the Deathly Hallows: Part 2
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt2294629/?ref_=fn_al_tt_1')
+                      img(src='/images/frozen.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 9. Frozen
+                  .w3-display-container.mySlides
+                    a(href='https://www.imdb.com/title/tt2771200/')
+                      img(src='/images/beauty.jpg' style='width:100%')
+                    .w3-display-bottomleft.w3-large.w3-container.w3-padding-16.w3-black
+                      | 10. Beauty and the Beast
+                  button.w3-button.w3-display-left.w3-black(onclick='plusDivs(-1)') &#x276E;
+                  button.w3-button.w3-display-right.w3-black(onclick='plusDivs(1)') &#x276F;
+                script.
+                  var slideIndex = 1;
+                  showDivs(slideIndex);
+                  function plusDivs(n) {
+                  showDivs(slideIndex += n);
+                  }
+                  function showDivs(n) {
+                  var i;
+                  var x = document.getElementsByClassName("mySlides");
+                  if (n > x.length) {slideIndex = 1}
+                  if (n < 1) {slideIndex = x.length}
+                  for (i = 0; i < x.length; i++) {
+                  x[i].style.display = "none";
+                  }
+                  x[slideIndex-1].style.display = "block";
+                  }
+        // end page-wrapper
+    // content
+    // Footer Start
+    footer.footer
+      .container-fluid
+        .row
+          .col-md-6
+            | 2018 &copy; TAMU Computer Science
+          .col-md-6
+            .text-md-right.footer-links.d-none.d-sm-block
+              a(href='https://engineering.tamu.edu/cse/index.html' target='_blank') About
+    // end Footer
+  // ==============================================================
+  // End Page content
+  // ==============================================================
+// END wrapper
+// bundle
+script(src='assets/js/app.min.js')

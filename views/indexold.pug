@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  div
+    h1= title
+    p Welcome to #{title}
+
+    //- form(action="/", method="get")
+    //-   button(type="submit") HOME
+
+  //- section(class="insert")
+  //-   h3 Insert Data
+  //-   form(action="/insert", method="post")
+  //-     div(class="input")
+  //-       label(for="title") Title
+  //-       input(type="text", id="title", name="title")
+  //-     div(class="input")
+  //-       label(for="content") Content
+  //-       input(type="text", id="content", name="content")
+  //-     div(class="input")
+  //-       label(for="author") Author
+  //-       input(type="text", id="author", name="author")
+  //-     button(type="submit") INSERT
+
+  section(class="insert")
+    h3 Search By Title
+    div (Lowercase only)
+    form(action="/search",method="get")
+      div(class="input")
+        input(type="text", id="title", name="title")
+      button(type="submit") SEARCH
+
+  //- section(class="update")
+  //-   h3 Update Data
+  //-   form(action="/update", method="post")
+  //-     div(class="input")
+  //-       label(for="title") Title
+  //-       input(type="text", id="title", name="title")
+  //-     div(class="input")
+  //-       label(for="id") ID
+  //-       input(type="text", id="id", name="id")
+  //-     div(class="input")
+  //-       label(for="content") Content
+  //-       input(type="text", id="content", name="content")
+  //-     div(class="input")
+  //-       label(for="author") Author
+  //-       input(type="text", id="author", name="author")
+  //-     button(type="submit") UPDATE
+
+  //- We dont' want delete functionality available. We need to preserve
+  //- the integrity of our data
+
+  //- section(class="delete")
+  //-   h3 Delete Data
+  //-   form(action="/update", method="post")
+  //-     div(class="input")
+  //-       label(for="id") ID
+  //-       input(type="text", id="id", name="id")
+  //-     button(type="submit") DELETE

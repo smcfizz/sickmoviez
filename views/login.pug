@@ -1,0 +1,85 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Hyper - Responsive Bootstrap 4 Admin Dashboard
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  // App favicon
+  link(rel='shortcut icon' href='../../../assets/images/favicon.ico')
+  // App css
+  link(href='../../../assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='../../../assets/css/app.min.css' rel='stylesheet' type='text/css')
+doctype html
+head
+  meta(name='google-signin-scope' content='profile email')
+  meta(name='google-signin-client_id' content='990085872208-d1qptsog9q0qfhfh8gnpaoqai27ek44n.apps.googleusercontent.com')
+  script(src='https://apis.google.com/js/platform.js' async='' defer='')
+
+script.
+  function onSignIn(googleUser) {
+  // Useful data for your client-side scripts:
+  var profile = googleUser.getBasicProfile();
+  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+  console.log('Full Name: ' + profile.getName());
+  console.log('Given Name: ' + profile.getGivenName());
+  console.log('Family Name: ' + profile.getFamilyName());
+  console.log("Image URL: " + profile.getImageUrl());
+  console.log("Email: " + profile.getEmail());
+  // The ID token you need to pass to your backend:
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log("ID Token: " + id_token);
+  };
+
+.account-pages.mt-5.mb-5
+  .container
+    .row.justify-content-center
+      .col-lg-5
+        .card
+          // Logo
+          .card-header.pt-4.pb-4.text-center.bg-primary
+            a(href='/')
+              span
+                img(src='../../../assets/images/logodark.png' alt='' height='50')
+          .card-body.p-4
+            .text-center.w-75.m-auto
+              h4.text-dark-50.text-center.mt-0.font-weight-bold Sign In
+              p.text-muted.mb-4 Enter your username and password to access your user account.
+            .g-signin2(data-onsuccess='onSignIn' data-theme='dark')
+            form(action = "/submit-login" , method = "post")
+              .form-group(action = "/submit-login" , method = "post")
+                label(for='emailaddress') Username
+                input#user.form-control(type='text' placeholder='Enter your email' name='user')
+              if incorrect
+                h5(style="color:red") Invalid user or password. Try again!
+              .form-group(action = "/submit-login" , method = "post")
+                label(for='password') Password
+                input#password.form-control(type='password' required='' placeholder='Enter your password' name = 'password')
+              .form-group.mb-3
+                .custom-control.custom-checkbox
+                  input#checkbox-signin.custom-control-input(type='checkbox' checked='')
+                  label.custom-control-label(for='checkbox-signin') Remember me
+              .form-group.mb-0.text-center
+                button.btn.btn-primary(href='/')  Log In 
+
+          // end card-body
+        // end card
+        .row.mt-3
+          .col-12.text-center
+            p.text-muted
+              | Don&apos;t have an account? 
+              form(action="/signup", method="get")
+              a.text-dark.ml-1(href='/signup')
+                b Sign Up
+          // end col
+        // end row
+      // end col
+    // end row
+  // end container
+// end page
+footer.footer.footer-alt
+  | 2018 &copy; Hyper - Coderthemes.com
+// App js
+script(src='../../../assets/js/app.min.js')
+
+

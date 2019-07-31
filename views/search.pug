@@ -1,0 +1,126 @@
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  link(href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+  meta(charset='utf-8')
+  title Hyper | Responsive Bootstrap 4 Admin Dasboard - Documentation
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  // App favicon
+  link(rel='shortcut icon' href='assets/images/favicon.ico')
+  // App css
+  link(href='assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='assets/css/app.min.css' rel='stylesheet' type='text/css')
+// Begin page
+#wrapper
+  // ==============================================================
+  // Start Page Content here
+  // ==============================================================
+  .content-page
+    .content
+      // Topbar Start
+      .navbar-custom
+        a.logo.text-center.d-none.d-md-inline-block.mr-2(href='/')
+          span.logo-lg
+            img(src='assets/images/logo.png' alt='' height='30')
+          if isSignedIn
+            a(href= '/user/' + username) Welcome, #{username}
+          else
+            a(href= '/login/') Sign in
+        button.btn.btn-sm.btn-danger.d-inline-block.d-lg-none.button-menu-mobile(type='button') Menu
+        span.badge.badge-dark.float-right 
+          form(action="/search", method="get").form-inline
+            input.form-control.mr-sm-2(type='text' placeholder='Search Sickmoviez' aria-label='Search', id="title", name="title", autocomplete="off", autofocus)
+            input(hidden, id="ac", name="ac", value="true")
+            input(hidden, id="start", name="start", value="0")
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+      // end Topbar
+
+
+      // Start Content
+      .container-fluid
+        // start page title
+        .row
+          .col-12
+            .page-title-box
+              .page-title-right
+                ol.breadcrumb.m-0
+                  li.breadcrumb-item
+                    a(href='javascript: void(0);') Main Page
+        // end page title
+        .row
+          .col-12
+            .card
+              h2 Search Results For "#{query}""
+              if isMistake
+                h3
+                  a(href="/search?title=" + suggestion) Did you mean "
+                    i
+                      span(id="title", name="title") #{suggestion}
+                    span "?
+              table#basic-datatable.table.dt-responsive.nowrap
+                thead.thead-light
+                  tr
+                    th Name
+                    th Entry Type
+                    th .
+                tbody
+                  ol 
+                   each val in collections
+                    tr
+                      td 
+                        a(href="/detail/movie/" + val.id) #{val.title}
+                      td #{val.type}
+                      td
+                        a(href="/detail/movie/" + val.id) DETAILS 
+                   each val in names
+                    tr
+                      td 
+                        a(href="/detail/" + val.type + "/" + val.id) #{val.name}
+                      td #{val.type}
+                      td
+                        a(href="/detail/" + val.type + "/" + val.id) DETAILS
+              // end card-body
+            // end card
+          // end col
+        // end row
+      // container
+    // content
+
+  // ==============================================================
+  // End Page content
+  // ==============================================================
+// END wrapper
+// App js
+script(src='../../../assets/js/app.min.js')
+
+
+script(src='../../../assets/js/app.min.js')
+// third party js
+script(src='../../../assets/js/vendor/jquery.dataTables.js')
+script(src='../../../assets/js/vendor/dataTables.bootstrap4.js')
+script(src='../../../assets/js/vendor/dataTables.responsive.min.js')
+script(src='../../../assets/js/vendor/responsive.bootstrap4.min.js')
+// third party js ends
+script(type='text/Javascript').
+  $('#basic-datatable').DataTable({
+  keys: true,
+  "language": {
+  "paginate": {
+  "previous": "<i class='mdi mdi-chevron-left'>",
+  "next": "<i class='mdi mdi-chevron-right'>"
+  }
+  },
+  "drawCallback": function () {
+  $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
+  }
+  });
+
+

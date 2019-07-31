@@ -1,0 +1,90 @@
+
+head
+  //source used: w3 schools
+  title Movies Database Search
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  link(href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+  link(href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet')
+  script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+  
+
+
+// Navbar
+nav.navbar.navbar-default
+  .container
+    .navbar-header
+      button.navbar-toggle(type='button' data-toggle='collapse' data-target='#myNavbar')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/') Movie Search Database
+    #myNavbar.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          if isSignedIn
+            center
+              h5 Welcome, #{username}
+        li
+          a(href='/') HOME
+        li
+          a(href='/about') ABOUT
+        li
+          //- a(href='/search.pug') MOVIE SEARCH
+          form(action="/search", method="get")
+            div
+              input(type="text", id="title", name="title", placeholder="Search", autocomplete="off")
+              input(hidden, id="ac", name="ac", value="true")
+              input(hidden, id="start", name="start", value="0")
+              button( type="submit") SEARCH
+
+block content
+  h1 Search Results for "#{query}"
+  if isMistake
+    h3
+      a(href="/search?title=" + suggestion) Did you mean "
+        i
+          span(id="title", name="title") #{suggestion}
+        span "?
+  div
+    //- Don't mess with the below line!
+    //- if posts
+    center
+      if previous
+        a(href="/search?title=" + query + "&ac=" + isMistake + "&start=" + prevOffset) PREVIOUS PAGE
+      span &nbsp;&nbsp;&nbsp;&nbsp;
+      if next
+        a(href="/search?title=" + query + "&ac=" + isMistake + "&start=" + nextOffset) NEXT PAGE
+    div
+      ol
+        each val in collections
+          li
+            article(class="item") 
+              div Name: #{val.title}
+              div Type: movie
+              div ID: #{val.id}
+              a(href="/detail/movie/" + val.id) VIEW
+        each val in names
+          li
+            article(class="item") 
+              div Name: #{val.name}
+              div Type: #{val.type}
+              div ID: #{val.id}
+              a(href="/detail/" + val.type + "/" + val.id) VIEW
+    center
+      if previous
+        a(href="/search?title=" + query + "&ac=" + isMistake + "&start=" + prevOffset) PREVIOUS PAGE
+      span &nbsp;&nbsp;&nbsp;&nbsp;
+      if next
+        a(href="/search?title=" + query + "&ac=" + isMistake + "&start=" + nextOffset) NEXT PAGE
+      
+      //- article(class="item") 
+      //-   a(href="/detail/" + val._id, style="border: 1px solid red")
+      //-     span Title: #{val.name}
+      //-     span Homepage: #{val.type}
+      //-     span Revenue: #{val.id}

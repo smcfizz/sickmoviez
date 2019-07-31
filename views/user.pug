@@ -1,0 +1,230 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Hyper - Responsive Bootstrap 4 Admin Dashboard
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='A fully featured admin theme which can be used to build CRM, CMS, etc.' name='description')
+  meta(content='Coderthemes' name='author')
+  // App favicon
+  link(rel='shortcut icon' href='../assets/images/favicon.ico')
+  // App css
+  link(href='../assets/css/icons.min.css' rel='stylesheet' type='text/css')
+  link(href='../assets/css/app.min.css' rel='stylesheet' type='text/css')
+// Begin page
+.wrapper
+  // ========== Left Sidebar Start ==========
+  .left-side-menu
+    .slimscroll-menu
+      // LOGO
+      a.logo.text-center(href='../index.html')
+        span.logo-lg
+          img(src='../assets/images/logo.png' alt='' height='16')
+        span.logo-sm
+          img(src='../assets/images/logo_sm.png' alt='' height='16')
+      // - Sidemenu
+  // ==============================================================
+  // Start Page Content here
+  // ==============================================================
+  .content-page
+    .content
+      .navbar-custom
+        a.logo.text-center.d-none.d-md-inline-block.mr-2(href='/')
+          span.logo-lg
+            img(src='../../../assets/images/logo.png' alt='' height='30')
+            a(href= '/user/' + username) Welcome #{username}
+        button.btn.btn-sm.btn-danger.d-inline-block.d-lg-none.button-menu-mobile(type='button') Menu
+        span.badge.badge-dark.float-right 
+          form(action="/search", method="get").form-inline
+            input.form-control.mr-sm-2(type='text' placeholder='Search Sickmoviez' aria-label='Search', id="title", name="title", autocomplete="off", autofocus)
+            input(hidden, id="ac", name="ac", value="true")
+            input(hidden, id="start", name="start", value="0")
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+      // Start Content
+      .container-fluid
+        // start page title
+        .row
+          .col-12
+            .page-title-box
+              .page-title-right
+                ol.breadcrumb.m-0
+                  li.breadcrumb-item
+                    a(href='javascript: void(0);') Hyper
+                  li.breadcrumb-item
+                    a(href='javascript: void(0);') Pages
+                  li.breadcrumb-item.active Profile
+              h4.page-title Profile
+        // end page title
+        .row
+          .col-sm-12
+            // Profile
+            .card.bg-primary
+              .card-body.profile-user-box
+                .row
+                  .col-sm-8
+                    .media
+                      span.float-left.m-2.mr-4
+                        img.rounded-circle.img-thumbnail(src='../assets/images/pippin.jpg' style='height: 100px;' alt='')
+                      .media-body
+                        h4.mt-1.mb-1.text-white #{user.username}
+                        p.font-13.text-white-50  Premium Sickmoviez Member
+                        ul.mb-0.list-inline.text-light
+                      // end media-body
+                  // end col
+                  .col-sm-4
+                    .text-center.mt-sm-0.mt-3.text-sm-right
+                      button.btn.btn-light(type='button' onclick = 'signOut();')
+                        i.mdi.mdi-account-settings-variant.mr-1
+                        |  Logout
+                      script.
+                        function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                        console.log('User signed out.');
+                        });
+                        }
+                  // end col
+                // end row
+              // end card-body/ profile-user-box
+            // end profile/ card
+          // end col
+        // end row
+        .row
+          .col-md-4
+            // Personal-Information
+            .card
+              .card-body
+                h4.header-title.mt-0.mb-3 SICKMOVIEZ PROFILE
+                p.text-muted.font-13
+                  | Welcome!
+                hr
+                .text-left
+                  p.text-muted
+                    strong Full Name :
+                    span.ml-2 #{user.firstname} #{user.lastname}
+                  p.text-muted
+                    strong Email :
+                    span.ml-2 #{user.user}
+                  p.text-muted
+                    strong Location :
+                    span.ml-2 USA
+                  p.text-muted
+                    strong Language :
+                    span.ml-2  English
+                  p.text-muted.mb-0
+                    strong Elsewhere :
+                    a.d-inline-block.ml-2.text-muted(title='' data-placement='top' data-toggle='tooltip' href='' data-original-title='Facebook')
+                      i.mdi.mdi-facebook
+                    a.d-inline-block.ml-2.text-muted(title='' data-placement='top' data-toggle='tooltip' href='' data-original-title='Twitter')
+                      i.mdi.mdi-twitter
+                    a.d-inline-block.ml-2.text-muted(title='' data-placement='top' data-toggle='tooltip' href='' data-original-title='Skype')
+                      i.mdi.mdi-skype
+            // Personal-Information
+
+          .col-md-8
+            // Chart
+            .card
+              .card-body
+                h4.header-title.mb-3 YOUR FAVORITE MOVIES
+                 ul
+                    each val in user.favorites
+                        li 
+                          a(href="/detail/movie/" + val.id) #{val.title}
+            // End Chart
+ 
+    // Footer Start
+    footer.footer
+      .container-fluid
+        .row
+          .col-md-6
+            | 2018 &copy; TAMU Computer Science
+          .col-md-6
+            .text-md-right.footer-links.d-none.d-md-block
+              a(href='https://engineering.tamu.edu/cse/index.html') About
+    // end Footer
+  // ==============================================================
+  // End Page content
+  // ==============================================================
+// END wrapper
+// Right Sidebar
+.right-bar
+  .rightbar-title
+    a.right-bar-toggle.float-right(href='javascript:void(0);')
+      i.dripicons-cross.noti-icon
+    h5.m-0 Settings
+  .slimscroll-menu.rightbar-content
+    // Settings
+    hr.mt-0
+    h5.pl-3 Basic Settings
+    hr.mb-0
+    .p-3
+      .custom-control.custom-checkbox.mb-2
+        input#notifications-check.custom-control-input(type='checkbox' checked='')
+        label.custom-control-label(for='notifications-check') Notifications
+      .custom-control.custom-checkbox.mb-2
+        input#api-access-check.custom-control-input(type='checkbox')
+        label.custom-control-label(for='api-access-check') API Access
+      .custom-control.custom-checkbox.mb-2
+        input#auto-updates-check.custom-control-input(type='checkbox' checked='')
+        label.custom-control-label(for='auto-updates-check') Auto Updates
+      .custom-control.custom-checkbox.mb-2
+        input#online-status-check.custom-control-input(type='checkbox' checked='')
+        label.custom-control-label(for='online-status-check') Online Status
+      .custom-control.custom-checkbox.mb-2
+        input#auto-payout-check.custom-control-input(type='checkbox')
+        label.custom-control-label(for='auto-payout-check') Auto Payout
+    // Timeline
+    hr.mt-0
+    h5.pl-3 Recent Activity
+    hr.mb-0
+    .pl-2.pr-2
+      .timeline-alt
+        .timeline-item
+          i.mdi.mdi-upload.bg-info-lighten.text-info.timeline-icon
+          .timeline-item-info
+            a.text-info.font-weight-bold.mb-1.d-block(href='#') You sold an item
+            small Paul Burgess just purchased &ldquo;Hyper - Admin Dashboard&rdquo;!
+            p
+              small.text-muted 5 minutes ago
+        .timeline-item
+          i.mdi.mdi-airplane.bg-primary-lighten.text-primary.timeline-icon
+          .timeline-item-info
+            a.text-primary.font-weight-bold.mb-1.d-block(href='#') Product on the Bootstrap Market
+            small
+              | Dave Gamache added
+              span.font-weight-bold Admin Dashboard
+            p
+              small.text-muted 30 minutes ago
+        .timeline-item
+          i.mdi.mdi-microphone.bg-info-lighten.text-info.timeline-icon
+          .timeline-item-info
+            a.text-info.font-weight-bold.mb-1.d-block(href='#') Robert Delaney
+            small
+              | Send you message
+              span.font-weight-bold &quot;Are you there?&quot;
+            p
+              small.text-muted 2 hours ago
+        .timeline-item
+          i.mdi.mdi-upload.bg-primary-lighten.text-primary.timeline-icon
+          .timeline-item-info
+            a.text-primary.font-weight-bold.mb-1.d-block(href='#') Audrey Tobey
+            small
+              | Uploaded a photo
+              span.font-weight-bold &quot;Error.jpg&quot;
+            p
+              small.text-muted 14 hours ago
+        .timeline-item
+          i.mdi.mdi-upload.bg-info-lighten.text-info.timeline-icon
+          .timeline-item-info
+            a.text-info.font-weight-bold.mb-1.d-block(href='#') You sold an item
+            small Paul Burgess just purchased &ldquo;Hyper - Admin Dashboard&rdquo;!
+            p
+              small.text-muted 1 day ago
+// /Right-bar
+// App js
+script(src='../assets/js/app.min.js')
+// third party js
+script(src='../assets/js/vendor/Chart.bundle.min.js')
+// third party js ends
+// demo app
+script(src='../assets/js/pages/demo.profile.js')
+// end demo js
